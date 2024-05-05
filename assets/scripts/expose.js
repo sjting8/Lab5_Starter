@@ -9,9 +9,18 @@ function init() {
   const selectVolume = document.getElementById("volume-controls");
   const playButton = document.getElementsByTagName("button");
 
+  const jsConfetti = new JSConfetti();
+  var party = false;
+
   selectImage.addEventListener("change", (event) => {
+    if(event.target.value == "party-horn") {
+      party = true;
+    }
+    else {
+      party = false;
+    }
     result[0].src = "assets/images/" + event.target.value + ".svg";
-    selectAudio[0].src = "assets/audio/" + event.target.value + ".mp3";  
+    selectAudio[0].src = "assets/audio/" + event.target.value + ".mp3";
   });
 
   selectVolume.addEventListener("change", (event) => {
@@ -31,6 +40,9 @@ function init() {
   });
 
   playButton[0].onclick = (event) => {
+    if(party) {
+      jsConfetti.addConfetti();
+    }
     selectAudio[0].play();
   };
 }
